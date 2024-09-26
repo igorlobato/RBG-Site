@@ -11,11 +11,12 @@ Ordenar
         <h5 class="card-title">{{$post->topico}}</h5>
         <h5 class="card-title">{{$post->titulo}}</h5>
         <img src="{{$post->imagem}}" class="card-img-top" style="width: 550px; margin:auto; display:block; border-radius: 15px;" alt="">
+        <br>
       <p class="card-text">{{$post->descricao}}</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item bg-dark text-white">{{$post->id_user}}</li>
-      <li class="list-group-item bg-dark text-white">Comentários: X</li>
+      <li class="list-group-item bg-dark text-white">Postador: {{$post->user->nome}}</li>
+      <li class="list-group-item bg-dark text-white">Comentários: {{$post->comentarios_count}}</li>
     </ul>
     <div class="card-body">
       <a href="#" class="card-link text-primary">Gostei</a>
