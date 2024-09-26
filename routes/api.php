@@ -29,5 +29,4 @@ Route::apiResource('/users', UserController::class); //Já cria automáticamente
 // Route::get('/users', [UserController::class, 'index']);
 // Route::post('/users', [UserController::class, 'store']);
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::post('/posts', [PostController::class, 'store']);
+Route::apiResource('/posts', PostController::class);

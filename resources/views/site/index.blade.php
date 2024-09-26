@@ -2,24 +2,32 @@
 @section('title', 'RGB')
 @section('conteudo')
 
+<div class="branco">
+Ordenar
+</div>
 @foreach($posts as $post)
-<div class="card center" style="width: 100%;">
-    <img src="..." class="card-img-top" alt="...">
+<div class="card bg-dark text-white">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <h5 class="card-title">{{$post->topico}}</h5>
+        <h5 class="card-title">{{$post->titulo}}</h5>
+        <img src="{{$post->imagem}}" class="card-img-top" style="width: 550px; margin:auto; display:block; border-radius: 15px;" alt="">
+      <p class="card-text">{{$post->descricao}}</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">An item</li>
-      <li class="list-group-item">A second item</li>
-      <li class="list-group-item">A third item</li>
+      <li class="list-group-item bg-dark text-white">{{$post->id_user}}</li>
+      <li class="list-group-item bg-dark text-white">Comentários: X</li>
     </ul>
     <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+      <a href="#" class="card-link text-primary">Gostei</a>
+      <a href="#" class="card-link text-primary">Não Gostei</a>
     </div>
 </div>
 
+<hr>
 @endforeach
+
+<div class="row center">
+    {{ $posts->links('custom.pagination') }}
+</div>
 
 @endsection

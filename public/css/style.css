@@ -15,6 +15,11 @@ body{
 }
 
 .conteudo{
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    width: 800px;
+    margin: auto;
 }
 
 .sidebar{
@@ -25,4 +30,9 @@ body{
 
 .branco{
     color: white;
+}
+
+.centrodiv{
+    margin: 0;
+    display: block;
 }

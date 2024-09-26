@@ -9,6 +9,13 @@ use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
+
+    public function __construct(
+        protected Post $repository,
+     ){
+
+     }
+
     public function index(){
         $posts = Post::all();
 
@@ -19,6 +26,13 @@ class PostController extends Controller
         $data = $request->all();
 
         $post = Post::create($data);
+
+        return new PostResource($post);
+    }
+
+    public function show(string $id)
+    {
+        $post = $this->repository->findOrFail($id);
 
         return new PostResource($post);
     }
