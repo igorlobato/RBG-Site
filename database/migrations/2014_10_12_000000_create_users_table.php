@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('senha',255);
-            $table->tinyInteger('adm');
+            $table->tinyInteger('adm')->nullable();
             $table->string('fotodeperfil')->nullable();
             $table->rememberToken();
             $table->timestamps();

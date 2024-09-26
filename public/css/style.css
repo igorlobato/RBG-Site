@@ -1,9 +1,28 @@
 .rgb{
     font-size: 30px;
     font-weight: bolder;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    ;
+}
+
+.main{
+    display: flex;
+}
+
+body{
+    background-color: black;
+    /*height: 100%;*/
+    flex-direction: column;
 }
 
 .conteudo{
-    width: 80%;
+}
+
+.sidebar{
+    height: 100%;
+    left: 0;
+    display: inline-block;
+}
+
+.branco{
+    color: white;
 }
