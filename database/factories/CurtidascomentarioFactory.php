@@ -21,6 +21,7 @@ class CurtidascomentarioFactory extends Factory
         return [
             'id_user' => User::pluck('id')->random(),
             'id_comentario' => Comentarios::pluck('id')->random(),
+            'descurtir' => 1,
         ];
     }
 }

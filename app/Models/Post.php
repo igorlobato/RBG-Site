@@ -27,4 +27,8 @@ class Post extends Model
         return $this->hasMany(Comentarios::class, 'id_post');
     }
 
+    public function curtidaspost()
+    {
+        return $this->hasMany(Curtidaspost::class, 'id_post');
+    }
 }

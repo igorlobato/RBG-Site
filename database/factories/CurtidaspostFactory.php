@@ -21,6 +21,7 @@ class CurtidaspostFactory extends Factory
         return [
             'id_user' => User::pluck('id')->random(),
             'id_post' => Post::pluck('id')->random(),
+            'descurtir' => 1,
         ];
     }
 }

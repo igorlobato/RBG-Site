@@ -1,11 +1,16 @@
 .rgb{
     font-size: 30px;
-    font-weight: bolder;
-    ;
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
 }
+
+/* Para centralizar o conteudo apesar da sidebar foi necessário colocar position:fixed nela e margin:auto no conteudo */
 
 .main{
     display: flex;
+    position: relative;
 }
 
 body{
@@ -15,17 +20,14 @@ body{
 }
 
 .conteudo{
-    align-items: center;
-    align-content: center;
-    align-self: center;
-    width: 800px;
-    margin: auto;
+    width: 50%;
+    margin: auto; /* Centralizar desconsiderando a sidebar */
+    max-width: 100%; /* Evita quebra de layout em telas menores */
 }
 
 .sidebar{
     height: 100%;
-    left: 0;
-    display: inline-block;
+    position: fixed;
 }
 
 .branco{
@@ -35,4 +37,32 @@ body{
 .centrodiv{
     margin: 0;
     display: block;
+}
+
+.dropdown-menu {
+    /* Faz o dropdown do icone do usuário do nav abrir no espaço da tela */
+    right: 0; /* Alinha o menu à direita do seu elemento pai */
+    left: auto; /* Remove o alinhamento à esquerda */
+}
+
+
+/* Conteudo dos posts */
+
+.topico{
+    font-size: xx-large;
+}
+
+.titulo{
+    font-size: x-large;
+}
+
+/* Alinha ícones com o texto verticalmente */
+.align-center {
+    display: flex;
+    align-items: center;
+}
+
+/* Adiciona espaçamento do ícone para o texto */
+.material-icons, .material-symbols-outlined{
+    margin-right: 8px;
 }
