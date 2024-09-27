@@ -21,3 +21,4 @@ Route::get('/', function () {
 */
 
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
+Route::get('post/{id}', [SiteController::class, 'details'])->name('site.details');

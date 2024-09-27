@@ -17,7 +17,7 @@
 </head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="rgb" href="{{route('site.index')}}">
+            <a style="text-decoration:none;" class="rgb" href="{{route('site.index')}}">
                 <span style="color: red;">R</span>
                 <span style="color: green;">G</span>
                 <span style="color: blue;">B</span>

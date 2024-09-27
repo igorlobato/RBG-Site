@@ -27,4 +27,10 @@ class SiteController extends Controller
 
         return view('site/index', compact('posts'));
     }
+
+    public function details($id){
+        $post = Post::where('id', $id)->first();
+
+        return view('site/details', compact('post'));
+    }
 }
