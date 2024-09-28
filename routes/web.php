@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,7 @@ Route::get('/', function () {
 
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 Route::get('post/{id}', [SiteController::class, 'details'])->name('site.details');
+
+Route::view('login', 'login.login')->name('login.login');
+Route::post('logar', [LoginController::class, 'logar'])->name('login.logar');
+Route::get('cadastro', [LoginController::class, 'create'])->name('login.create');
