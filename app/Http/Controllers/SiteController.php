@@ -29,7 +29,16 @@ class SiteController extends Controller
     }
 
     public function details($id){
-        $post = Post::where('id', $id)->first();
+        $post = Post::with(['comentarios.user', 'comentarios.curtidascomentario'])
+        ->withCount('comentarios')
+        ->withCount(['curtidaspost as curtidas_count' => function ($query) {
+            $query->where('descurtir', false);
+        }])
+        // Contar descurtidas onde descurtir é true
+        ->withCount(['curtidaspost as descurtidas_count' => function ($query) {
+            $query->where('descurtir', true);
+        }])
+        ->where('id', $id)->first();
 
         return view('site/details', compact('post'));
     }
