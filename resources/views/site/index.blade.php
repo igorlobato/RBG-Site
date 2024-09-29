@@ -5,12 +5,13 @@
 <div class="branco">
     <div class="dropdown" style="margin: 10px 0px;">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-          Dropdown button
+          Organizar
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li><a class="dropdown-item" href="#">Mais recentes</a></li>
+          <li><a class="dropdown-item" href="#">Mais antigos</a></li>
+          <li><a class="dropdown-item" href="#">Mais curtidos</a></li>
+          <li><a class="dropdown-item" href="#">Mais comentados</a></li>
         </ul>
       </div>
 </div>

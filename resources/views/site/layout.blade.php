@@ -33,10 +33,11 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
                   </form>
             </ul>
-        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             @auth
-                <li>
-                    <a href="#" class="nav-link text-secondary">
+            @if(auth()->user()->adm==1)
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li>
+                        <a href="#" class="nav-link text-secondary">
                             <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
                             Home
                         </a>
@@ -45,7 +46,7 @@
                         <a href="#" class="nav-link text-white">
                             <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
                                 Dashboard
-                    </a>
+                        </a>
                     </li>
                     <li>
                         <a href="#" class="nav-link text-white">
@@ -66,20 +67,23 @@
                         </a>
                     </li>
                 </ul>
+            @endif
                 <div class="flex-shrink-0 dropdown">
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small shadow">
+                        <li><a href="{{--route('login.logout')--}}" class="dropdown-item">{{auth()->user()->nome}}</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a href="{{--route('login.logout')--}}" class="dropdown-item">Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a href="{{route('login.logout')}}" class="dropdown-item">Sair</a></li>
                     </ul>
                 </div>
-            @else
-                <a href="{{ route('login.entrar') }}" style="color:white;">Entrar</a>
-                <span class="branco">/</span>
-                <a href="{{ route('login.create') }}" style="color:white;">Cadastrar-se</a>
+                @else
+                    <a href="{{ route('login.entrar') }}" style="color:white;">Entrar</a>
+                    <span class="branco">/</span>
+                    <a href="{{ route('login.create') }}" style="color:white;">Cadastrar-se</a>
             @endauth
             </div>
         </div>
