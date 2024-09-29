@@ -23,8 +23,14 @@ class LoginController extends Controller
         return view('login.cadastro');
     }
 
+    public function entrar()
+    {
+        return view('login.login');
+    }
+
     public function logar(Request $request){
-        $credenciais = $request->validate([
+        // Valida os campos de email e senha
+        $request->validate([
             'email' => ['required', 'email'],
             'senha' => ['required'],
         ], [
@@ -33,13 +39,28 @@ class LoginController extends Controller
             'senha.required' => 'O campo senha é obrigatório!',
         ]);
 
-        if(Auth::attempt($credenciais, $request->remember)){
+        // Cria um array de credenciais, renomeando 'senha' para 'password'
+        $credenciais = [
+            'email' => $request->email,
+            'password' => $request->senha,
+        ];
+
+        if (Auth::attempt($credenciais, $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('site/index');
-        }else{
+            // redirect()->intended() É usado para rediricionar para o lugar que o usuário queria mas foi redirecionado para a página de login
+            return redirect()->route('site.index');
+        } else {
             return redirect()->back()->with('erro', 'Email ou senha invalida.');
         }
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect(route('site.index'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
