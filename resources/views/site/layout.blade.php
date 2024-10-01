@@ -17,7 +17,7 @@
 </head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a style="text-decoration:none;" class="rgb" href="{{route('site.index')}}">
+            <a style="text-decoration:none; margin-right:40px;" class="rgb" href="{{route('site.index')}}">
                 <span style="color: red;">R</span>
                 <span style="color: green;">G</span>
                 <span style="color: blue;">B</span>
@@ -27,53 +27,49 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="mr-auto">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Digite algo..." aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-                  </form>
-            </ul>
+                <div class="d-flex align-items-center mr-auto">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Digite algo..." aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+                    </form>
+                </div>
+
             @auth
             @if(auth()->user()->adm==1)
                 <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                     <li>
-                        <a href="#" class="nav-link text-secondary">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
+                        <a href="{{route('site.index')}}" class="nav-link text-white text-center">
+                            <span class="material-symbols-outlined d-block mx-auto mb-1" style="font-size: 24px;">home</span>
                             Home
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
+                        <a href="#" class="nav-link text-white text-center">
+                            <span class="material-symbols-outlined d-block mx-auto mb-1">
+                                dashboard_2
+                                </span>
                                 Dashboard
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
-                            Orders
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
-                            Products
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                            Customers
-                        </a>
-                    </li>
+                    {{-- <li>
+                        @if(auth()->user()->adm==1)
+                        <span style="color:green;">ADM</span>
+                        @endif
+                    </li> --}}
                 </ul>
             @endif
                 <div class="flex-shrink-0 dropdown">
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        @if(auth()->user()->fotodeperfil==null)
+                            <span class="material-symbols-outlined">
+                                person
+                            </span>
+                        @else
+                            <img src="{{auth()->user()->fotodeperfil}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                        @endif
                     </a>
                     <ul class="dropdown-menu text-small shadow">
-                        <li><a href="{{--route('login.logout')--}}" class="dropdown-item">{{auth()->user()->nome}}</a></li>
+                        <li><a href="#" class="dropdown-item">{{auth()->user()->nome}}</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a href="{{--route('login.logout')--}}" class="dropdown-item">Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
