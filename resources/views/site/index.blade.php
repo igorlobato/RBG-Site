@@ -2,7 +2,17 @@
 @section('title', 'RGB')
 @section('conteudo')
 
+
 <div class="branco">
+    @if ($mensagem = Session::get('sucesso'))
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+        <div class="card-header">Parabéns</div>
+        <div class="card-body">
+          {{-- <h5 class="card-title">Success card title</h5> --}}
+          <p class="card-text">{{$mensagem}}</p>
+        </div>
+    </div>
+    @endif
     <div class="dropdown" style="margin: 10px 0px;">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
           Organizar

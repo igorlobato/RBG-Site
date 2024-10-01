@@ -20,10 +20,17 @@
         <button type="submit" class="btn btn-primary">Cadastrar-se</button>
     </form>
 </div>
-
+<br>
 @if($errors->any())
     @foreach($errors->all() as $error)
-        {{$error}} <br>
+        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+            <div class="card-header">Erro</div>
+            <div class="card-body">
+            {{-- <h5 class="card-title">Success card title</h5> --}}
+            <p class="card-text">{{$error}}</p>
+            </div>
+        </div>
+        <br>
     @endforeach
 @endif
 

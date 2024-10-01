@@ -29,14 +29,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'nome' => 'required|string|max:30',
+            'senha' => 'required|min:4',
+        ], [
+            'email.required' => 'O campo email é obrigatório.',
+            'email.email' => 'O campo email deve ser um endereço de email válido.',
+            'email.unique' => 'Este email já está em uso.',
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.string' => 'O campo nome deve ser um texto.',
+            'nome.max' => 'O campo nome não pode ter mais que 30 caracteres.',
+            'senha.required' => 'O campo senha é obrigatório.',
+            'senha.min' => 'O campo senha deve ter pelo menos 4 caracteres.',
+        ]);
+
         $user = $request->all();
         $user['senha'] = bcrypt($request->senha);
         $user = User::create($user);
 
         Auth::login($user);
 
-        return redirect()->route('site.index');
+        // Após tudo dar certo envia uma mensagem chamada sucesso com o texto, que deve ser tratada na página redirecionada
+        return redirect()->route('site.index')->with('sucesso', 'Usuário cadastrado com sucesso!');
     }
+
 
     /**
      * Display the specified resource.
