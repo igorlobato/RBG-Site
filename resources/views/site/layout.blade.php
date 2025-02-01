@@ -58,7 +58,8 @@
                     </li> --}}
                 </ul>
             @endif
-                <div class="flex-shrink-0 dropdown">
+                <div class="flex-shrink-0 dropdown d-flex align-items-center">
+                    <a style="color:white; margin-right: 15px">{{auth()->user()->nome}}</a>
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         @if(auth()->user()->fotodeperfil==null)
                             <span class="material-symbols-outlined">
@@ -69,9 +70,7 @@
                         @endif
                     </a>
                     <ul class="dropdown-menu text-small shadow">
-                        <li><a href="#" class="dropdown-item">{{auth()->user()->nome}}</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a href="{{--route('login.logout')--}}" class="dropdown-item">Perfil</a></li>
+                        <li><a href="{{route('login.perfil')}}" class="dropdown-item">Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a href="{{route('login.logout')}}" class="dropdown-item">Sair</a></li>
                     </ul>
@@ -121,7 +120,7 @@
                 <div class="collapse" id="account-collapse" style="">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         @auth
-                            <li><a href="{{--route('login.logout')--}}" class="dropdown-item branco">Perfil</a></li>
+                            <li><a href="{{route('login.perfil')}}" class="dropdown-item branco">Perfil</a></li>
                             <li><a href="{{route('login.logout')}}" class="dropdown-item branco">Sair</a></li>
                         @else
                             <li><a href="{{ route('login.entrar') }}" class="dropdown-item branco">Entrar</a></li>

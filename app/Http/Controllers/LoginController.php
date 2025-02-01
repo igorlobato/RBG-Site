@@ -61,6 +61,10 @@ class LoginController extends Controller
         return redirect(route('site.index'));
     }
 
+    public function perfil(){
+        return view('login.perfil');
+    }
+
 
     /**
      * Store a newly created resource in storage.

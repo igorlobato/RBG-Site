@@ -30,5 +30,6 @@ Route::get('entrar', [LoginController::class, 'entrar'])->name('login.entrar');
 Route::post('logar', [LoginController::class, 'logar'])->name('login.logar');
 Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
 Route::get('cadastro', [LoginController::class, 'create'])->name('login.create');
+Route::get('perfil', [LoginController::class, 'perfil'])->name('login.perfil');
 
 Route::post('users/store', [UserController::class, 'store'])->name('users.store');

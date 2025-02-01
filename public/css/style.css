@@ -6,6 +6,14 @@
     font-style: normal;
 }
 
+hr{
+    border-color: white;
+}
+
+span{
+    color:white;
+}
+
 /* Para centralizar o conteudo apesar da sidebar foi necessário colocar position:fixed nela e margin:auto no conteudo */
 
 .main{
@@ -65,4 +73,9 @@ body{
 /* Adiciona espaçamento do ícone para o texto */
 .material-icons, .material-symbols-outlined{
     margin-right: 8px;
+}
+
+/* Perfil */
+.fotodeperfil{
+    text-align: center;
 }

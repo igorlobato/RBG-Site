@@ -1,5 +1,5 @@
 @extends('site.layout')
-@section('title', 'RGB')
+@section('title', 'Login')
 @section('conteudo')
 
 

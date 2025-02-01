@@ -22,6 +22,7 @@ class SiteController extends Controller
         ->withCount(['curtidaspost as descurtidas_count' => function ($query) {
             $query->where('descurtir', true);
         }])
+        ->orderBy('created_at', 'desc')
         ->paginate(10);
         //withCount adiciona automáticamente uma coluna chamada comentarios_count a cada post
 
