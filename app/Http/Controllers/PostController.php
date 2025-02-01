@@ -12,15 +12,30 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.novopost');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'topico' => 'required|string|max:10',
+            'titulo' => 'required|string|max:300',
+            'descricao' => 'required|string|min:4',
+        ], [
+            'topico.required' => 'O campo topico é obrigatório.',
+            'titulo.required' => 'O campo titulo é obrigatório.',
+            'descricao.min' => 'O campo descrição não pode ter menos que 4 caracteres.'
+        ]);
+
+        $post = $request->all();
+        $post['id_user'] = auth()->id();
+        $post = Post::create($post);
+
+        // Após tudo dar certo envia uma mensagem chamada sucesso com o texto, que deve ser tratada na página redirecionada
+        return redirect()->route('site.index')->with('sucesso', 'Post cadastrado com sucesso!');
     }
 
     /**

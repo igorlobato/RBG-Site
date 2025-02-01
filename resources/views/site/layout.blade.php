@@ -70,6 +70,8 @@
                         @endif
                     </a>
                     <ul class="dropdown-menu text-small shadow">
+                        <li><a href="{{route('site.novopost')}}" class="dropdown-item">Novo Post</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a href="{{route('login.perfil')}}" class="dropdown-item">Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a href="{{route('login.logout')}}" class="dropdown-item">Sair</a></li>

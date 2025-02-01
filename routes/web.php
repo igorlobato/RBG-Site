@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ Route::get('/', function () {
 
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 Route::get('post/{id}', [SiteController::class, 'details'])->name('site.details');
+Route::get('novopost', [PostController::class, 'index'])->name('site.novopost');
+Route::post('posts/create', [PostController::class, 'create'])->name('posts.novopost');
 
 Route::view('login', 'login.login')->name('login.login');
 Route::get('entrar', [LoginController::class, 'entrar'])->name('login.entrar');

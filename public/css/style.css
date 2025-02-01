@@ -79,3 +79,10 @@ body{
 .fotodeperfil{
     text-align: center;
 }
+
+/* Para quando precisar centralizar algo */
+.center{
+    text-align: center;
+    margin: auto;
+    display: flex;
+}
