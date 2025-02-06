@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use App\Http\Controllers\SiteController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,27 +12,28 @@ use App\Http\Controllers\PostController;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('welcome');
+Route::get('RGB/index', function () {
+    return Inertia::render('/GuestLayout', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
-*/
 
-Route::get('/', [SiteController::class, 'index'])->name('site.index');
-Route::get('post/{id}', [SiteController::class, 'details'])->name('site.details');
-Route::get('novopost', [PostController::class, 'index'])->name('site.novopost');
-Route::post('posts/create', [PostController::class, 'create'])->name('posts.novopost');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::view('login', 'login.login')->name('login.login');
-Route::get('entrar', [LoginController::class, 'entrar'])->name('login.entrar');
-Route::post('logar', [LoginController::class, 'logar'])->name('login.logar');
-Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
-Route::get('cadastro', [LoginController::class, 'create'])->name('login.create');
-Route::get('perfil', [LoginController::class, 'perfil'])->name('login.perfil');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+require __DIR__.'/auth.php';
