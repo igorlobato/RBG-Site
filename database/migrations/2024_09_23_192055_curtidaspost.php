@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('curtidasposts', function (Blueprint $table) {
             $table->id();
 
+            $table->boolean('descurtir')->default(false); // Adiciona a coluna descurtir com valor padrão false
+
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 

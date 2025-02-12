@@ -5,28 +5,34 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Post;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class SiteController extends Controller
 {
-    public function index(){
+    public function index(): Response{
 
-        //$posts = Post::paginate(10);
+        return Inertia::render('RGB/Index', [
+            //
+        ]);
 
-        //Fazer dessa forma reduz o número de consultas no banco de dados
-        $posts = Post::with('user')
-        ->withCount('comentarios')
-        ->withCount(['curtidaspost as curtidas_count' => function ($query) {
-            $query->where('descurtir', false);
-        }])
-        // Contar descurtidas onde descurtir é true
-        ->withCount(['curtidaspost as descurtidas_count' => function ($query) {
-            $query->where('descurtir', true);
-        }])
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
-        //withCount adiciona automáticamente uma coluna chamada comentarios_count a cada post
+        // //$posts = Post::paginate(10);
 
-        return view('site/index', compact('posts'));
+        // //Fazer dessa forma reduz o número de consultas no banco de dados
+        // $posts = Post::with('user')
+        // ->withCount('comentarios')
+        // ->withCount(['curtidaspost as curtidas_count' => function ($query) {
+        //     $query->where('descurtir', false);
+        // }])
+        // // Contar descurtidas onde descurtir é true
+        // ->withCount(['curtidaspost as descurtidas_count' => function ($query) {
+        //     $query->where('descurtir', true);
+        // }])
+        // ->orderBy('created_at', 'desc')
+        // ->paginate(10);
+        // //withCount adiciona automáticamente uma coluna chamada comentarios_count a cada post
+
+        // return view('site/index', compact('posts'));
     }
 
     public function details($id){
@@ -42,5 +48,10 @@ class SiteController extends Controller
         ->where('id', $id)->first();
 
         return view('site/details', compact('post'));
+    }
+
+    public function create()
+    {
+        //
     }
 }

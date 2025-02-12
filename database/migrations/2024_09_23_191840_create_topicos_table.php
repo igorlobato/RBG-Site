@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('curtidasposts', function (Blueprint $table) {
-            $table->boolean('descurtir')->default(false); // Adiciona a coluna descurtir com valor padrão false
+        Schema::create('topicos', function (Blueprint $table) {
+            $table->id();
+            $table->string('titulo')->unique();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('curtidasposts', function (Blueprint $table) {
-            $table->dropColumn('descurtir'); // Remove a coluna caso seja necessário reverter
-        });
+        Schema::dropIfExists('topicos');
     }
 };

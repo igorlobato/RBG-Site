@@ -10,12 +10,24 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'topico',
+        'id_topico',
         'titulo',
         'descricao',
         'imagem',
         'id_user',
     ];
+
+    public function store(Request $request): RedirectResponse
+    {
+        //
+        $validated = $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+
+        $request->user()->chirps()->create($validated);
+
+        return redirect(route('/'));
+    }
 
     public function user()
     {
