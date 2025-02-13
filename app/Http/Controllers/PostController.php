@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\Topicos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -23,9 +25,8 @@ class PostController extends Controller
     public function create()
     {
         $topicos = Topicos::all();
-        dd($topicos); // Verifique os dados que estão sendo passados para o Vue
-        return Inertia::render('NovoPost', [
-            'topicos' => Topicos::all()
+        return Inertia::render('RGB/NovoPost', [
+            'topicos' => $topicos
         ]);
     }
 
@@ -36,14 +37,14 @@ class PostController extends Controller
     {
 
         $request->validate([
-            'id_topico' => 'required|exists:topicos, id',
-            'titulo' => 'required|string|max:100',
-            'descricao' => 'required|string',
+            'topico_id' => 'required|exists:topicos,id',
+            'title' => 'required|string|max:100',
+            'content' => 'required|string',
             'imagem' => 'nullable|image|max:2048', // Valida se a imagem é válida
         ], [
-            'topico.required' => 'O campo topico é obrigatório.',
-            'titulo.required' => 'O campo titulo é obrigatório.',
-            'descricao.min' => 'O campo descrição não pode ter menos que 4 caracteres.'
+            'topico_id.required' => 'O campo topico é obrigatório.',
+            'title.required' => 'O campo titulo é obrigatório.',
+            'content.min' => 'O campo descrição não pode ter menos que 4 caracteres.'
         ]);
 
         $imagemPath = null;
@@ -55,10 +56,10 @@ class PostController extends Controller
 
         Post::create([
             'titulo' => $request->title,
-            'id_topico' => $request->id_topico,
+            'id_topico' => $request->topico_id,
             'descricao' => $request->content,
             'imagem' => $imagemPath,
-            'user_id' => auth()->id(),
+            'id_user' => auth()->id(),
         ]);
 
         // Após tudo dar certo envia uma mensagem chamada sucesso com o texto, que deve ser tratada na página redirecionada
@@ -86,7 +87,15 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        Gate::authorize('update', $post);
+
+        $validated = $request->validate([
+            'descricao' => 'required|string|max:255',
+        ]);
+
+        $post->update($validated);
+
+        return redirect(route('rgb.index'));
     }
 
     /**

@@ -13,8 +13,10 @@ class SiteController extends Controller
     public function index(): Response{
 
         return Inertia::render('RGB/Index', [
-            //
+            'posts' => Post::with('user:id,name', 'topico:id,titulo')->latest()->get(),
+            'auth' => ['user' => auth()->user()],
         ]);
+    }
 
         // //$posts = Post::paginate(10);
 
@@ -33,7 +35,6 @@ class SiteController extends Controller
         // //withCount adiciona automáticamente uma coluna chamada comentarios_count a cada post
 
         // return view('site/index', compact('posts'));
-    }
 
     public function details($id){
         $post = Post::with(['comentarios.user', 'comentarios.curtidascomentario'])
@@ -51,6 +52,11 @@ class SiteController extends Controller
     }
 
     public function create()
+    {
+        //
+    }
+
+    public function update(Request $request, Post $post): RedirectResponse
     {
         //
     }

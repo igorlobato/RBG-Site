@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +18,7 @@ use App\Http\Controllers\SiteController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('RGB/Index', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-        'auth' => ['user' => auth()->user()] //Usuário autenficado
-    ]);
-})->name('home');
+Route::get('/', [SiteController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -40,12 +33,12 @@ Route::middleware('auth')->group(function () {
 Route::resource('rgb', SiteController::class)
     ->only(['index', 'store']);
 
-Route::resource('post', SiteController::class)
-->only(['create', 'store']);
+Route::resource('post', PostController::class)
+->only(['create', 'store', 'update']);
 
 Route::middleware('auth')->get('/novopost', function () {
     return Inertia::render('RGB/NovoPost');
 })->name('novopost');
 
-
+Route::middleware('auth')->get('/novopost', [PostController::class, 'create'])->name('novopost');
 require __DIR__.'/auth.php';
